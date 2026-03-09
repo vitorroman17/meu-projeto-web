@@ -13,7 +13,6 @@ function adicionarAoCarrinho(nome, preco, idQuantidade) {
 
     inputQtd.value = 1;
 
-    // Alert Bootstrap ao adicionar
     const alerta = document.createElement('div');
     alerta.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
     alerta.style.zIndex = '1050';
@@ -25,7 +24,6 @@ function adicionarAoCarrinho(nome, preco, idQuantidade) {
 }
 
 function removerDoCarrinho(index) {
-    // Pedir confirmação para remover
     if (confirm("Deseja remover este item do carrinho?")) {
         carrinho.splice(index, 1);
         salvarEAtualizar();
@@ -50,7 +48,6 @@ function exibirCarrinho() {
         total += subtotal;
         const li = document.createElement('li');
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
-        // Formatação BRL Real
         li.innerHTML = `
             ${item.nome} (x${item.quantidade}) - ${subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
             <button class="btn btn-danger btn-sm" onclick="removerDoCarrinho(${index})">Remover</button>
@@ -59,7 +56,6 @@ function exibirCarrinho() {
     });
 
     if (totalElemento) {
-        // Formatação BRL Real no total
         totalElemento.innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 }
@@ -70,7 +66,6 @@ function efetivarCompra() {
         return;
     }
 
-    // Alert Bootstrap ao finalizar
     const alerta = document.createElement('div');
     alerta.className = 'alert alert-info alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
     alerta.style.zIndex = '1050';
@@ -110,4 +105,48 @@ async function carregarDepoimentos() {
 document.addEventListener('DOMContentLoaded', () => {
     exibirCarrinho();
     carregarDepoimentos();
+});
+
+async function enviarFormularioContato(e) {
+  e.preventDefault();
+
+  const dados = { 
+    nome: document.getElementById('nome').value, 
+    email: document.getElementById('email').value, 
+    mensagem: document.getElementById('mensagem').value 
+  };
+
+  try {
+    const r = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    }); 
+
+    const ok = r.status === 201;
+    mostrarAlerta(ok ? 'success' : 'danger',
+                  ok ? 'Mensagem enviada com sucesso!' : 'Erro ao enviar mensagem.');
+    if (ok) e.target.reset();
+  } catch {
+    mostrarAlerta('danger', 'Erro ao enviar mensagem.');
+  }
+}
+
+function mostrarAlerta(tipo, texto) {
+  const div = document.createElement('div');
+  div.className = `alert alert-${tipo} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
+  div.style.zIndex = '1050';
+  div.innerHTML = `${texto} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`; 
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    exibirCarrinho();
+    carregarDepoimentos();
+    
+    const formContato = document.getElementById('form-contato');
+    if (formContato) {
+        formContato.addEventListener('submit', enviarFormularioContato);
+    }
 });
