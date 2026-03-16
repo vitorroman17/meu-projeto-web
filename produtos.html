@@ -1,91 +1,209 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produtos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <h1 class="text-center text-primary mt-5">Lançamento Oficial</h1>
-    <div class="nav">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Meu Projeto</a>
-        </div>
-      </nav>
-    </div>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produtos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-dark text-light">
     <div class="container">
-      <div class="row mt-5">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://picsum.photos/300/200?random=1" class="card-img-top" alt="Produto 1">
-            <div class="card-body">
-              <h5 class="card-title">Teclado Gamer</h5>
-              <p class="card-text">Teclado mecânico com RGB.</p>
-              <p class="fw-bold">R$ 200,00</p>
-              <input type="number" class="form-control mb-2" id="qtd-1" value="1" min="1">
-              <button class="btn btn-success w-100 mb-2" onclick="adicionarAoCarrinho('Teclado Gamer', 200.00, 'qtd-1')">Adicionar ao Carrinho</button>
-              <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#modalProduto" data-nome="Teclado Gamer" data-descricao="Teclado mecânico com RGB" data-preco="200.00">Ver Detalhes</button>
+      <h1 class="text-center text-primary mt-5">Lançamento Oficial</h1>
+    </div>
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary-subtle">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Meu Projeto</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="produtos.html">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contato.html">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </div>
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="https://picsum.photos/300/200?random=1"
+                class="card-img-top"
+                alt="Produto 1"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Teclado Gamer</h5>
+                <p class="card-text">Teclado mecânico com RGB.</p>
+                <p class="fw-bold">R$ 200,00</p>
+                <input
+                  type="number"
+                  class="form-control mb-2"
+                  id="qtd-1"
+                  value="1"
+                  min="1"
+                />
+                <button
+                  class="btn btn-success w-100 mb-2"
+                  onclick="adicionarAoCarrinho('Teclado Gamer', 200.0, 'qtd-1')"
+                >
+                  Adicionar ao Carrinho
+                </button>
+                <button
+                  class="btn btn-info w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalProduto"
+                  data-nome="Teclado Gamer"
+                  data-descricao="Teclado mecânico com RGB"
+                  data-preco="200.00"
+                >
+                  Ver Detalhes
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://picsum.photos/300/200?random=2" class="card-img-top" alt="Produto 2">
-            <div class="card-body">
-              <h5 class="card-title">Mouse Gamer</h5>
-              <p class="card-text">Mouse com precisão alta e DPI ajustável.</p>
-              <p class="fw-bold">R$ 150,00</p>
-              <input type="number" class="form-control mb-2" id="qtd-2" value="1" min="1">
-              <button class="btn btn-success w-100 mb-2" onclick="adicionarAoCarrinho('Mouse Gamer', 150.00, 'qtd-2')">Adicionar ao Carrinho</button>
-              <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#modalProduto" data-nome="Mouse Gamer" data-descricao="Mouse com precisão alta e DPI ajustável" data-preco="150.00">Ver Detalhes</button>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="https://picsum.photos/300/200?random=2"
+                class="card-img-top"
+                alt="Produto 2"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Mouse Gamer</h5>
+                <p class="card-text">
+                  Mouse com precisão alta e DPI ajustável.
+                </p>
+                <p class="fw-bold">R$ 150,00</p>
+                <input
+                  type="number"
+                  class="form-control mb-2"
+                  id="qtd-2"
+                  value="1"
+                  min="1"
+                />
+                <button
+                  class="btn btn-success w-100 mb-2"
+                  onclick="adicionarAoCarrinho('Mouse Gamer', 150.0, 'qtd-2')"
+                >
+                  Adicionar ao Carrinho
+                </button>
+                <button
+                  class="btn btn-info w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalProduto"
+                  data-nome="Mouse Gamer"
+                  data-descricao="Mouse com precisão alta e DPI ajustável"
+                  data-preco="150.00"
+                >
+                  Ver Detalhes
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://picsum.photos/300/200?random=3" class="card-img-top" alt="Produto 3">
-            <div class="card-body">
-              <h5 class="card-title">Headset Gamer</h5>
-              <p class="card-text">Headset com som surround 7.1.</p>
-              <p class="fw-bold">R$ 250,00</p>
-              <input type="number" class="form-control mb-2" id="qtd-3" value="1" min="1">
-              <button class="btn btn-success w-100 mb-2" onclick="adicionarAoCarrinho('Headset Gamer', 250.00, 'qtd-3')">Adicionar ao Carrinho</button>
-              <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#modalProduto" data-nome="Headset Gamer" data-descricao="Headset com som surround 7.1" data-preco="250.00">Ver Detalhes</button>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="https://picsum.photos/300/200?random=3"
+                class="card-img-top"
+                alt="Produto 3"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Headset Gamer</h5>
+                <p class="card-text">Headset com som surround 7.1.</p>
+                <p class="fw-bold">R$ 250,00</p>
+                <input
+                  type="number"
+                  class="form-control mb-2"
+                  id="qtd-3"
+                  value="1"
+                  min="1"
+                />
+                <button
+                  class="btn btn-success w-100 mb-2"
+                  onclick="adicionarAoCarrinho('Headset Gamer', 250.0, 'qtd-3')"
+                >
+                  Adicionar ao Carrinho
+                </button>
+                <button
+                  class="btn btn-info w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalProduto"
+                  data-nome="Headset Gamer"
+                  data-descricao="Headset com som surround 7.1"
+                  data-preco="250.00"
+                >
+                  Ver Detalhes
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container mt-5 mb-5">
-      <h3>Seu Carrinho</h3>
-      <ul id="lista-carrinho" class="list-group mb-3"></ul>
-      <div class="alert alert-info text-center">
-        <h4>Valor Total: R$ <span id="valor-total">0,00</span></h4>
+      <div class="container mt-5 mb-5">
+        <h3>Seu Carrinho</h3>
+        <ul id="lista-carrinho" class="list-group mb-3"></ul>
+        <div class="alert alert-info text-center">
+          <h4>Valor Total: R$ <span id="valor-total">0,00</span></h4>
+        </div>
+        <button class="btn btn-primary w-100 mb-5" onclick="efetivarCompra()">
+          Efetivar Compra
+        </button>
       </div>
-      <button class="btn btn-primary w-100 mb-5" onclick="efetivarCompra()">Efetivar Compra</button>
     </div>
-  </div>
 
-  <div class="modal fade" id="modalProduto" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitulo"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modalCorpo"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Comprar</button>
+    <div
+      class="modal fade"
+      id="modalProduto"
+      tabindex="-1"
+      aria-labelledby="modalTitulo"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitulo"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalCorpo"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button type="button" class="btn btn-primary">Comprar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="js/main.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
 </html>

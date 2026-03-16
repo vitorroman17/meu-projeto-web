@@ -22,3 +22,33 @@ export async function enviarFormularioContato(dados) {
         return false;
     }
 }
+export async function inicializarListenersCEP() {
+    const cepInput = document.getElementById('cep');
+    
+    if (!cepInput) return;
+
+    cepInput.addEventListener('blur', async function() {
+        const cep = this.value.replace(/\D/g, '');
+        
+        if (cep.length === 8) {
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+                
+                if (!data.erro) {
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade;
+                    document.getElementById('estado').value = data.uf;
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar CEP:', error);
+                alert('Ocorreu um erro ao buscar o CEP. Verifique sua conexão.');
+            }
+        } else if (cep.length > 0) {
+            alert('Formato de CEP inválido. Digite 8 números.');
+        }
+    });
+}
