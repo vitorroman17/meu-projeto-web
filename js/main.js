@@ -1,5 +1,5 @@
 import { carregarDepoimentos, enviarFormularioContato } from './api.js';
-import { mostrarAlerta, renderizarDepoimentos, exibirCarrinho } from './ui.js';
+import { mostrarAlerta, renderizarDepoimentos, exibirCarrinho, inicializarToggleTema } from './ui.js';
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
@@ -55,6 +55,7 @@ async function handleFormContato(e) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  inicializarToggleTema();
     exibirCarrinho();
     const depoimentos = await carregarDepoimentos();
     renderizarDepoimentos(depoimentos);

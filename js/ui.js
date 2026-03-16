@@ -65,3 +65,52 @@ export function exibirCarrinho() {
   }
 }
 
+function aplicarTema(tema) {
+  document.documentElement.setAttribute('data-bs-theme', tema);
+
+  const body = document.body;
+  const navbar = document.querySelector('.navbar');
+  const botaoTema = document.getElementById('btn-tema');
+
+  if (tema === 'dark') {
+    body.classList.add('bg-dark', 'text-light');
+    body.classList.remove('bg-light', 'text-dark');
+    if (navbar) {
+      navbar.classList.add('navbar-dark', 'bg-dark');
+      navbar.classList.remove('navbar-light', 'bg-light');
+    }
+    if (botaoTema) {
+      botaoTema.textContent = 'Tema: Dark';
+      botaoTema.classList.add('btn-outline-light');
+      botaoTema.classList.remove('btn-outline-dark');
+    }
+  } else {
+    body.classList.add('bg-light', 'text-dark');
+    body.classList.remove('bg-dark', 'text-light');
+    if (navbar) {
+      navbar.classList.add('navbar-light', 'bg-light');
+      navbar.classList.remove('navbar-dark', 'bg-dark');
+    }
+    if (botaoTema) {
+      botaoTema.textContent = 'Tema: Light';
+      botaoTema.classList.add('btn-outline-dark');
+      botaoTema.classList.remove('btn-outline-light');
+    }
+  }
+}
+
+export function inicializarToggleTema() {
+  const temaSalvo = localStorage.getItem('tema') || 'dark';
+  aplicarTema(temaSalvo);
+
+  const botaoTema = document.getElementById('btn-tema');
+  if (!botaoTema) return;
+
+  botaoTema.addEventListener('click', () => {
+    const temaAtual = document.documentElement.getAttribute('data-bs-theme') || 'dark';
+    const novoTema = temaAtual === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('tema', novoTema);
+    aplicarTema(novoTema);
+  });
+}
+
