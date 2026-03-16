@@ -56,7 +56,6 @@ async function handleFormContato(e) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     exibirCarrinho();
-    configurarModal();
     const depoimentos = await carregarDepoimentos();
     renderizarDepoimentos(depoimentos);
 
