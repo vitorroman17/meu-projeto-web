@@ -1,0 +1,161 @@
+// Tipografia
+$font-style-normal: normal;
+$font-style-italic: italic;
+
+$font-weight-light:    300;
+$font-weight-regular:  400;
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+
+$font-color-dark:   #e0e0e0;
+$font-color-light:  #212529;
+$font-color-ocean:  #caf0f8;
+$font-color-sunset: #fff3e0;
+
+$font-size-sm:   0.875rem;
+$font-size-base: 1rem;
+$font-size-lg:   1.25rem;
+$font-size-xl:   1.5rem;
+$font-size-xxl:  2rem;
+$font-size-disp: 2.5rem;
+
+// Temas
+[data-theme='dark'] {
+  --bg:      #121212;
+  --surface: #1e1e2e;
+  --card:    #1a1a2e;
+  --nav:     #0d0d1a;
+  --primary: #7c8fe8;
+  --accent:  #5865f2;
+  --text:    #{$font-color-dark};
+  --border:  #2d2d45;
+  --muted:   #a0a0b0;
+  --fw-h:    #{$font-weight-bold};
+  --fs-h:    #{$font-style-normal};
+}
+
+[data-theme='light'] {
+  --bg:      #f5f6fa;
+  --surface: #ffffff;
+  --card:    #ffffff;
+  --nav:     #ffffff;
+  --primary: #4a6cf7;
+  --accent:  #6c63ff;
+  --text:    #{$font-color-light};
+  --border:  #dee2e6;
+  --muted:   #6c757d;
+  --fw-h:    #{$font-weight-bold};
+  --fs-h:    #{$font-style-normal};
+}
+
+[data-theme='ocean'] {
+  --bg:      #0d1b2a;
+  --surface: #1b2838;
+  --card:    #162535;
+  --nav:     #090f1a;
+  --primary: #00b4d8;
+  --accent:  #0077b6;
+  --text:    #{$font-color-ocean};
+  --border:  #1e3a5f;
+  --muted:   #90cde8;
+  --fw-h:    #{$font-weight-semibold};
+  --fs-h:    #{$font-style-normal};
+}
+
+[data-theme='sunset'] {
+  --bg:      #1c0a00;
+  --surface: #2d1200;
+  --card:    #261000;
+  --nav:     #120700;
+  --primary: #ff6b35;
+  --accent:  #e8481c;
+  --text:    #{$font-color-sunset};
+  --border:  #5c2008;
+  --muted:   #d4956e;
+  --fw-h:    #{$font-weight-bold};
+  --fs-h:    #{$font-style-italic};
+}
+
+// Base
+body {
+  background-color: var(--bg);
+  color:            var(--text);
+  font-size:        $font-size-base;
+  font-weight:      $font-weight-regular;
+  font-style:       $font-style-normal;
+  transition:       background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:       var(--primary);
+  font-weight: var(--fw-h);
+  font-style:  var(--fs-h);
+}
+
+// Navbar
+.navbar {
+  background-color: var(--nav) !important;
+  border-bottom: 1px solid var(--border);
+
+  .navbar-brand { color: var(--primary) !important; font-weight: $font-weight-bold; }
+  .nav-link     { color: var(--text) !important; }
+  .nav-link:hover { color: var(--primary) !important; }
+}
+
+#btn-tema {
+  border-color: var(--primary);
+  color:        var(--primary);
+  font-size:    $font-size-sm;
+
+  &:hover { background-color: var(--primary); color: #000; }
+}
+
+// Cards
+.card {
+  background-color: var(--card)    !important;
+  border-color:     var(--border)  !important;
+  color:            var(--text)    !important;
+
+  .card-body h5, .card-body h6 { color: var(--primary); }
+}
+
+// Formulário
+.form-control {
+  background-color: var(--surface) !important;
+  border-color:     var(--border)  !important;
+  color:            var(--text)    !important;
+
+  &:focus {
+    background-color: var(--surface) !important;
+    border-color:     var(--primary) !important;
+    color:            var(--text)    !important;
+  }
+
+  &::placeholder { color: var(--muted); font-style: $font-style-italic; }
+}
+
+.form-label { color: var(--text); font-weight: $font-weight-medium; }
+
+.list-group-item {
+  background-color: var(--surface) !important;
+  border-color:     var(--border)  !important;
+  color:            var(--text)    !important;
+}
+
+// Responsivo
+@media (max-width: 575px) {
+  body  { font-size: $font-size-sm; }
+  h1    { font-size: $font-size-xl; }
+  h2    { font-size: $font-size-lg; }
+  #btn-tema { width: 100%; margin-top: 0.5rem; }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  h1 { font-size: $font-size-xxl; }
+}
+
+@media (min-width: 992px) {
+  h1 { font-size: $font-size-disp; }
+}
+

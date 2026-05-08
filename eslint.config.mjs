@@ -5,5 +5,6 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
+  { files: ["vite.config.js"], languageOptions: { globals: globals.node } },
   pluginReact.configs.flat.recommended,
 ]);
