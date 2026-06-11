@@ -1,15 +1,22 @@
-import { carregarDepoimentos, enviarFormularioContato } from "./api.js";
+import { carregarDepoimentos, enviarFormularioContato } from "./api.ts";
 import {
   mostrarAlerta,
   renderizarDepoimentos,
   exibirCarrinho,
   inicializarToggleTema,
-} from "./ui.js";
+} from "./ui.ts";
+import type { ItemCarrinho, DadosContato } from "./tipos.ts";
 
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let carrinho: ItemCarrinho[] = JSON.parse(
+  localStorage.getItem("carrinho") ?? "[]",
+);
 
-function adicionarAoCarrinho(nome, preco, idQuantidade) {
-  const inputQtd = document.getElementById(idQuantidade);
+function adicionarAoCarrinho(
+  nome: string,
+  preco: number,
+  idQuantidade: string,
+): void {
+  const inputQtd = document.getElementById(idQuantidade) as HTMLInputElement;
   const quantidade = parseInt(inputQtd.value);
   const itemExistente = carrinho.find((item) => item.nome === nome);
 
@@ -19,24 +26,24 @@ function adicionarAoCarrinho(nome, preco, idQuantidade) {
     carrinho.push({ nome, preco, quantidade });
   }
 
-  inputQtd.value = 1;
+  inputQtd.value = "1";
   mostrarAlerta("success", `${nome} adicionado ao carrinho!`);
   salvarEAtualizar();
 }
 
-function removerDoCarrinho(index) {
+function removerDoCarrinho(index: number): void {
   if (confirm("Deseja remover este item do carrinho?")) {
     carrinho.splice(index, 1);
     salvarEAtualizar();
   }
 }
 
-function salvarEAtualizar() {
+function salvarEAtualizar(): void {
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   exibirCarrinho();
 }
 
-function efetivarCompra() {
+function efetivarCompra(): void {
   if (carrinho.length === 0) {
     alert("Seu carrinho está vazio!");
     return;
@@ -46,19 +53,20 @@ function efetivarCompra() {
   salvarEAtualizar();
 }
 
-async function handleFormContato(e) {
+async function handleFormContato(e: SubmitEvent): Promise<void> {
   e.preventDefault();
-  const dados = {
-    nome: document.getElementById("nome").value,
-    email: document.getElementById("email").value,
-    mensagem: document.getElementById("mensagem").value,
+  const dados: DadosContato = {
+    nome: (document.getElementById("nome") as HTMLInputElement).value,
+    email: (document.getElementById("email") as HTMLInputElement).value,
+    mensagem: (document.getElementById("mensagem") as HTMLTextAreaElement)
+      .value,
   };
   const sucesso = await enviarFormularioContato(dados);
   mostrarAlerta(
     sucesso ? "success" : "danger",
     sucesso ? "Mensagem enviada com sucesso!" : "Erro ao enviar mensagem.",
   );
-  if (sucesso) e.target.reset();
+  if (sucesso) (e.target as HTMLFormElement).reset();
 }
 
 inicializarToggleTema();

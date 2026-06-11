@@ -1,4 +1,11 @@
-export function mostrarAlerta(tipo, texto) {
+import type {
+  Depoimento,
+  ItemCarrinho,
+  NomeTema,
+  TipoAlerta,
+} from "./tipos.ts";
+
+export function mostrarAlerta(tipo: TipoAlerta, texto: string): void {
   const div = document.createElement("div");
   div.className = `alert alert-${tipo} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
   div.style.zIndex = "1050";
@@ -6,25 +13,33 @@ export function mostrarAlerta(tipo, texto) {
   document.body.appendChild(div);
   setTimeout(() => div.remove(), 3000);
 }
-export function configurarModal() {
+
+export function configurarModal(): void {
   const modal = document.getElementById("modalProduto");
   if (modal) {
-    modal.addEventListener("show.bs.modal", function (event) {
-      const botao = event.relatedTarget;
+    modal.addEventListener("show.bs.modal", function (event: Event) {
+      const botao = (event as unknown as { relatedTarget: HTMLElement })
+        .relatedTarget;
       const nome = botao.getAttribute("data-nome");
       const descricao = botao.getAttribute("data-descricao");
       const preco = botao.getAttribute("data-preco");
 
-      document.getElementById("modalTitulo").textContent = nome;
-      document.getElementById("modalCorpo").innerHTML = `
+      const titulo = document.getElementById("modalTitulo");
+      const corpo = document.getElementById("modalCorpo");
+      if (titulo) titulo.textContent = nome;
+      if (corpo) {
+        corpo.innerHTML = `
                 <p><strong>Descrição:</strong> ${descricao}</p>
-                <p><strong>Preço:</strong> R$ ${parseFloat(preco).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</p>
+                <p><strong>Preço:</strong> R$ ${parseFloat(
+                  preco ?? "0",
+                ).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</p>
             `;
+      }
     });
   }
 }
 
-export function renderizarDepoimentos(data) {
+export function renderizarDepoimentos(data: Depoimento[]): void {
   const lista = document.getElementById("lista-depoimentos");
   if (!lista) return;
   lista.innerHTML = "";
@@ -42,13 +57,15 @@ export function renderizarDepoimentos(data) {
   });
 }
 
-export function exibirCarrinho() {
+export function exibirCarrinho(): void {
   const lista = document.getElementById("lista-carrinho");
   const totalElemento = document.getElementById("valor-total");
   let total = 0;
   if (!lista) return;
   lista.innerHTML = "";
-  let carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+  const carrinho: ItemCarrinho[] = JSON.parse(
+    localStorage.getItem("carrinho") || "[]",
+  );
   carrinho.forEach((item, index) => {
     const subtotal = item.preco * item.quantidade;
     total += subtotal;
@@ -69,19 +86,19 @@ export function exibirCarrinho() {
   }
 }
 
-const TEMAS = ["dark", "light", "ocean", "sunset"];
+const TEMAS: NomeTema[] = ["dark", "light", "ocean", "sunset"];
 
-const TEMA_LABELS = {
+const TEMA_LABELS: Record<NomeTema, string> = {
   dark: "Tema: Dark",
   light: "Tema: Light",
   ocean: "Tema: Ocean",
   sunset: "Tema: Sunset",
 };
 
-function aplicarTema(tema) {
+function aplicarTema(tema: NomeTema): void {
   const html = document.documentElement;
   const body = document.body;
-  const navbar = document.querySelector(".navbar");
+  const navbar = document.querySelector<HTMLElement>(".navbar");
   const botaoTema = document.getElementById("btn-tema");
 
   html.setAttribute("data-theme", tema);
@@ -101,8 +118,8 @@ function aplicarTema(tema) {
   }
 }
 
-export function inicializarToggleTema() {
-  const temaSalvo = localStorage.getItem("tema") || "dark";
+export function inicializarToggleTema(): void {
+  const temaSalvo = (localStorage.getItem("tema") as NomeTema) || "dark";
   aplicarTema(temaSalvo);
 
   const botaoTema = document.getElementById("btn-tema");
@@ -110,7 +127,8 @@ export function inicializarToggleTema() {
 
   botaoTema.addEventListener("click", () => {
     const temaAtual =
-      document.documentElement.getAttribute("data-theme") || "dark";
+      (document.documentElement.getAttribute("data-theme") as NomeTema) ||
+      "dark";
     const idx = TEMAS.indexOf(temaAtual);
     const novoTema = TEMAS[(idx + 1) % TEMAS.length];
     localStorage.setItem("tema", novoTema);

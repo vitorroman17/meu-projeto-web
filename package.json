@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "sass": "sass scss/main.scss css/style.css",
     "sass:watch": "sass --watch scss/main.scss css/style.css",
@@ -35,6 +36,7 @@
     "lint-staged": "^16.4.0",
     "prettier": "3.8.1",
     "sass": "^1.99.0",
+    "typescript": "^6.0.3",
     "vite": "^8.0.3"
   },
   "lint-staged": {
